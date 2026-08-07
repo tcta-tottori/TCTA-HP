@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大会案内・エントリー｜鳥取市テニス協会</title>
+  <meta name="description" content="鳥取市テニス協会が主催する大会の年間スケジュール・要項・エントリー方法のご案内です。エントリー受付中の大会はWEBフォームからお申し込みいただけます。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/img/ball.svg" type="image/svg+xml">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main>
+    <div class="page-hero">
+      <div class="container">
+        <p class="page-hero__en">Tournaments &amp; Entry</p>
+        <h1 class="page-hero__title">大会案内・エントリー</h1>
+        <p class="page-hero__lead">
+          協会主催大会の年間スケジュールとエントリー方法のご案内です。
+          受付中の大会はWEBフォームからお申し込みいただけます。
+        </p>
+      </div>
+      <img class="page-hero__deco" src="assets/img/ball.svg" alt="" aria-hidden="true">
+    </div>
+    <nav class="breadcrumb container" aria-label="パンくずリスト">
+      <a href="index.html">ホーム</a><span aria-hidden="true">/</span>大会案内・エントリー
+    </nav>
+
+    <!-- エントリー受付中・今後の大会 -->
+    <section class="section" style="padding-top:56px;">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="section-head__en">Entry</p>
+          <h2 class="section-head__ja">エントリー受付中・今後の大会</h2>
+          <p class="section-head__note" id="events-note"></p>
+        </div>
+        <div class="event-grid" id="active-events">
+          <p class="empty-note">読み込み中…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 年間スケジュール -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="section-head__en">Schedule</p>
+          <h2 class="section-head__ja" id="schedule-year">年間スケジュール</h2>
+        </div>
+        <div class="table-scroll fade-up">
+          <table class="schedule-table" id="schedule-table">
+            <thead>
+              <tr>
+                <th>大会名</th><th>種目</th><th>開催日</th><th>会場</th><th>申込締切</th><th>状況</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6"><span class="empty-note">読み込み中…</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- エントリー方法 -->
+    <section class="section">
+      <div class="container container--narrow">
+        <div class="section-head fade-up">
+          <p class="section-head__en">How to Entry</p>
+          <h2 class="section-head__ja">エントリー方法</h2>
+        </div>
+        <ol class="step-list fade-up">
+          <li>
+            <strong>大会要項を確認する</strong>
+            <p>各大会の開催日・種目・参加資格・参加費を、このページまたは大会要項でご確認ください。</p>
+          </li>
+          <li>
+            <strong>WEBフォームからエントリーする</strong>
+            <p>「エントリーする」ボタンから申込フォームを開き、必要事項を入力して送信してください。受付中の大会のみボタンが表示されます。</p>
+          </li>
+          <li>
+            <strong>受付完了の連絡を受け取る</strong>
+            <p>受付完了はフォームの自動返信またはLINE公式アカウントでお知らせします。組み合わせ（ドロー）は開催前に新着情報に掲載します。</p>
+          </li>
+          <li>
+            <strong>大会当日</strong>
+            <p>開始時刻までに会場で受付をお済ませください。雨天時の開催可否は当日朝にLINE・新着情報でお知らせします。</p>
+          </li>
+        </ol>
+        <div class="note-box fade-up" style="margin-top:32px;">
+          <p>
+            ・大会へのエントリーには、原則として当該年度の協会登録が必要です。詳しくは
+            <a href="membership.html">協会登録</a>のページをご覧ください。<br>
+            ・WEBフォームでのお申し込みが難しい場合は、<a href="contact.html">お問い合わせ</a>に記載の連絡先までご相談ください。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="js/common.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const events = await loadJSON("data/events.json");
+        document.getElementById("schedule-year").textContent =
+          `年間スケジュール（${events.year}）`;
+        if (events.note) {
+          document.getElementById("events-note").textContent = events.note;
+        }
+
+        // 受付中・今後の大会カード
+        const active = events.items.filter((ev) => ev.status !== "finished");
+        const grid = document.getElementById("active-events");
+        grid.innerHTML = active.length
+          ? active.map((ev, i) => renderEventCard(ev, i)).join("")
+          : '<p class="empty-note">現在エントリー受付中の大会はありません。年間スケジュールをご覧ください。</p>';
+
+        // 年間スケジュール表
+        const tbody = document.querySelector("#schedule-table tbody");
+        tbody.innerHTML = events.items
+          .map(
+            (ev) => `
+            <tr>
+              <td>${escapeHTML(ev.name)}</td>
+              <td>${escapeHTML(ev.discipline)}</td>
+              <td>${escapeHTML(ev.dateText)}</td>
+              <td>${escapeHTML(ev.venue)}</td>
+              <td>${escapeHTML(ev.deadline)}</td>
+              <td>${statusPill(ev.status)}</td>
+            </tr>`
+          )
+          .join("");
+      } catch (e) {
+        document.getElementById("active-events").innerHTML =
+          '<p class="empty-note">大会情報を読み込めませんでした。</p>';
+      }
+      setupFadeUp();
+    });
+  </script>
+</body>
+</html>

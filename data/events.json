@@ -1,0 +1,72 @@
+{
+  "year": "令和8年度（2026年度）",
+  "note": "日程・会場は変更になる場合があります。最新情報は新着情報・LINE公式アカウントでお知らせします。",
+  "items": [
+    {
+      "name": "会長杯テニス大会 秋の部",
+      "discipline": "ダブルス",
+      "dateText": "2026年10月4日（日）",
+      "venue": "鳥取市営庭球場",
+      "deadline": "2026年9月18日（金）締切",
+      "status": "open",
+      "entryUrl": "https://forms.gle/replace-with-actual-form",
+      "docUrl": "",
+      "note": "雨天時は10月11日（日）に順延"
+    },
+    {
+      "name": "市民スポーツ祭 テニス競技",
+      "discipline": "シングルス・ダブルス",
+      "dateText": "2026年9月13日（日）",
+      "venue": "鳥取市営庭球場",
+      "deadline": "2026年8月28日（金）締切",
+      "status": "open",
+      "entryUrl": "https://forms.gle/replace-with-actual-form",
+      "docUrl": "",
+      "note": ""
+    },
+    {
+      "name": "クラブ対抗戦 後期日程",
+      "discipline": "団体戦",
+      "dateText": "2026年11月8日（日）・15日（日）",
+      "venue": "鳥取市営庭球場",
+      "deadline": "2026年10月23日（金）締切",
+      "status": "upcoming",
+      "entryUrl": "",
+      "docUrl": "",
+      "note": "各クラブ代表者経由でお申し込みください"
+    },
+    {
+      "name": "佐々木杯テニス大会",
+      "discipline": "ダブルス",
+      "dateText": "2026年12月6日（日）",
+      "venue": "鳥取市営庭球場",
+      "deadline": "2026年11月20日（金）締切",
+      "status": "upcoming",
+      "entryUrl": "",
+      "docUrl": "",
+      "note": ""
+    },
+    {
+      "name": "会長杯テニス大会 春の部",
+      "discipline": "ダブルス",
+      "dateText": "2026年5月17日（日）",
+      "venue": "鳥取市営庭球場",
+      "deadline": "受付終了",
+      "status": "finished",
+      "entryUrl": "",
+      "docUrl": "",
+      "note": "結果は大会結果ページをご覧ください"
+    },
+    {
+      "name": "クラブ対抗戦 前期日程",
+      "discipline": "団体戦",
+      "dateText": "2026年6月14日（日）・21日（日）",
+      "venue": "鳥取市営庭球場",
+      "deadline": "受付終了",
+      "status": "finished",
+      "entryUrl": "",
+      "docUrl": "",
+      "note": "結果は大会結果ページをご覧ください"
+    }
+  ]
+}

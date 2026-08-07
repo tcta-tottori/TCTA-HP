@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>新着情報｜鳥取市テニス協会</title>
+  <meta name="description" content="鳥取市テニス協会からのお知らせ・大会案内・大会結果・テニス教室の最新情報一覧です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="assets/img/ball.svg" type="image/svg+xml">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main>
+    <div class="page-hero">
+      <div class="container">
+        <p class="page-hero__en">News</p>
+        <h1 class="page-hero__title">新着情報</h1>
+        <p class="page-hero__lead">協会からのお知らせ・大会情報・結果などの最新情報です。</p>
+      </div>
+      <img class="page-hero__deco" src="assets/img/ball.svg" alt="" aria-hidden="true">
+    </div>
+    <nav class="breadcrumb container" aria-label="パンくずリスト">
+      <a href="index.html">ホーム</a><span aria-hidden="true">/</span>新着情報
+    </nav>
+
+    <section class="section" style="padding-top:56px;">
+      <div class="container">
+        <div class="news-filter" id="news-filter" role="group" aria-label="カテゴリで絞り込み">
+          <button type="button" data-cat="all" aria-pressed="true">すべて</button>
+          <button type="button" data-cat="お知らせ" aria-pressed="false">お知らせ</button>
+          <button type="button" data-cat="大会案内" aria-pressed="false">大会案内</button>
+          <button type="button" data-cat="大会結果" aria-pressed="false">大会結果</button>
+          <button type="button" data-cat="テニス教室" aria-pressed="false">テニス教室</button>
+        </div>
+        <div class="news-list" id="news-list">
+          <p class="empty-note">読み込み中…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script src="js/common.js"></script>
+  <script>
+    let allItems = [];
+
+    function renderList(cat) {
+      const items = allItems.filter((it) => cat === "all" || it.category === cat);
+      const listEl = document.getElementById("news-list");
+      if (items.length === 0) {
+        listEl.innerHTML = '<p class="empty-note">該当する情報はありません。</p>';
+        return;
+      }
+      listEl.innerHTML = items
+        .map((item) => {
+          const img = item.image
+            ? `<img src="${escapeHTML(item.image)}" alt="" loading="lazy">`
+            : "";
+          const title = item.link
+            ? `<a href="${escapeHTML(item.link)}">${escapeHTML(item.title)}</a>`
+            : escapeHTML(item.title);
+          return `
+            <article class="news-row">
+              <div class="news-row__meta">
+                <time class="news-row__date" datetime="${item.date}">${formatDate(item.date)}</time>
+                ${badgeHTML(item.category)}
+              </div>
+              <div>
+                <h2 class="news-row__title">${title}</h2>
+                <p class="news-row__body">${linkify(item.body)}</p>
+                ${img}
+              </div>
+            </article>`;
+        })
+        .join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const news = await loadJSON("data/news.json");
+        allItems = news.items.slice().sort((a, b) => b.date.localeCompare(a.date));
+        renderList("all");
+      } catch (e) {
+        document.getElementById("news-list").innerHTML =
+          '<p class="empty-note">新着情報を読み込めませんでした。</p>';
+      }
+
+      document.getElementById("news-filter").addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (!btn) return;
+        document
+          .querySelectorAll("#news-filter button")
+          .forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+        renderList(btn.dataset.cat);
+      });
+    });
+  </script>
+</body>
+</html>

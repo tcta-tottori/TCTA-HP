@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.22"/>
+    </linearGradient>
+  </defs>
+  <!-- コートを俯瞰した抽象ライン -->
+  <g stroke="url(#fade)" stroke-width="2" fill="none">
+    <path d="M 520 720 L 760 220 L 1400 220 L 1440 720 Z"/>
+    <path d="M 640 720 L 830 220"/>
+    <path d="M 1420 720 L 1330 220"/>
+    <path d="M 583 590 L 1432 590"/>
+    <path d="M 700 350 L 1370 350"/>
+    <path d="M 1030 720 L 1080 220"/>
+  </g>
+  <g fill="#D8F34E" opacity="0.5">
+    <circle cx="1180" cy="120" r="5"/>
+    <circle cx="360" cy="180" r="4"/>
+    <circle cx="240" cy="520" r="6"/>
+  </g>
+  <!-- 大きな英字装飾 -->
+  <text x="-20" y="700" font-family="Outfit, sans-serif" font-size="150" font-weight="700"
+        fill="#ffffff" opacity="0.05" letter-spacing="4">TENNIS</text>
+</svg>

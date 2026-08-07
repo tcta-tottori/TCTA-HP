@@ -1,0 +1,105 @@
+# =========================================================
+# Decap CMS 設定
+# スマホ・PCのブラウザから /admin/ で記事・大会・結果を編集できます
+# =========================================================
+
+backend:
+  name: git-gateway
+  branch: main # 公開ブランチ名に合わせて変更してください
+
+# 画像は原本のままリポジトリに保存される（再圧縮されないため画質が劣化しない）
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+locale: ja
+site_url: /
+logo_url: /assets/img/ball.svg
+
+collections:
+  - name: "site-data"
+    label: "サイト更新"
+    files:
+      # ---------- 新着情報 ----------
+      - name: "news"
+        label: "新着情報"
+        file: "data/news.json"
+        description: "トップページと新着情報ページに表示されます"
+        fields:
+          - name: "items"
+            label: "お知らせ一覧"
+            label_singular: "お知らせ"
+            widget: "list"
+            summary: "{{fields.date}}｜{{fields.title}}"
+            fields:
+              - { name: "date", label: "日付", widget: "date", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - name: "category"
+                label: "カテゴリ"
+                widget: "select"
+                options: ["お知らせ", "大会案内", "大会結果", "テニス教室"]
+              - { name: "title", label: "タイトル", widget: "string" }
+              - { name: "body", label: "本文", widget: "text", required: false, default: "" }
+              - { name: "link", label: "リンク先（任意・例 tournaments.html）", widget: "string", required: false, default: "" }
+              - { name: "image", label: "画像（任意）", widget: "image", required: false, default: "" }
+
+      # ---------- 大会案内 ----------
+      - name: "events"
+        label: "大会案内・エントリー"
+        file: "data/events.json"
+        description: "大会案内ページとトップページの大会カードに表示されます"
+        fields:
+          - { name: "year", label: "年度表示（例 令和8年度（2026年度））", widget: "string" }
+          - { name: "note", label: "注記", widget: "string", required: false, default: "" }
+          - name: "items"
+            label: "大会一覧"
+            label_singular: "大会"
+            widget: "list"
+            summary: "{{fields.name}}（{{fields.status}}）"
+            fields:
+              - { name: "name", label: "大会名", widget: "string" }
+              - { name: "discipline", label: "種目（例 ダブルス）", widget: "string" }
+              - { name: "dateText", label: "開催日（例 2026年10月4日（日））", widget: "string" }
+              - { name: "venue", label: "会場", widget: "string" }
+              - { name: "deadline", label: "申込締切（例 2026年9月18日（金）締切）", widget: "string" }
+              - name: "status"
+                label: "状況"
+                widget: "select"
+                options:
+                  - { label: "エントリー受付中", value: "open" }
+                  - { label: "受付開始前", value: "upcoming" }
+                  - { label: "受付終了", value: "closed" }
+                  - { label: "終了", value: "finished" }
+              - { name: "entryUrl", label: "エントリーフォームURL（受付中のみ表示）", widget: "string", required: false, default: "" }
+              - { name: "docUrl", label: "大会要項URL（PDF等・任意）", widget: "string", required: false, default: "" }
+              - { name: "note", label: "備考（順延日など・任意）", widget: "string", required: false, default: "" }
+
+      # ---------- 大会結果 ----------
+      - name: "results"
+        label: "大会結果"
+        file: "data/results.json"
+        description: "大会結果ページに年度別で表示されます"
+        fields:
+          - name: "years"
+            label: "年度一覧"
+            label_singular: "年度"
+            widget: "list"
+            summary: "{{fields.year}}"
+            fields:
+              - { name: "year", label: "年度（例 令和8年度）", widget: "string" }
+              - name: "items"
+                label: "大会結果一覧"
+                label_singular: "大会結果"
+                widget: "list"
+                summary: "{{fields.name}}"
+                fields:
+                  - { name: "name", label: "大会名", widget: "string" }
+                  - { name: "dateText", label: "開催日（例 2026年6月14日・21日）", widget: "string" }
+                  - name: "rows"
+                    label: "順位"
+                    label_singular: "順位"
+                    widget: "list"
+                    summary: "{{fields.label}}：{{fields.value}}"
+                    fields:
+                      - { name: "label", label: "順位（例 優勝）", widget: "string" }
+                      - { name: "value", label: "選手・クラブ名", widget: "string" }
+                  - { name: "comment", label: "コメント（任意）", widget: "text", required: false, default: "" }
+                  - { name: "docUrl", label: "詳細結果URL（PDF等・任意）", widget: "string", required: false, default: "" }

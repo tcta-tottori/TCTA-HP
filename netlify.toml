@@ -1,0 +1,17 @@
+# Netlify 設定
+# ビルド不要の静的サイト（リポジトリ直下をそのまま公開）
+
+[build]
+  publish = "."
+
+# 管理画面は検索エンジンに載せない
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# JSONデータは常に最新を取得（更新が即反映されるように）
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "no-cache"
