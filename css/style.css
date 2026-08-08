@@ -6,21 +6,22 @@
 
 :root {
   --c-bg: #ffffff;
-  --c-bg-alt: #f5f7f6;
-  --c-text: #1a2e35;
-  --c-text-sub: #5a6b70;
-  --c-primary: #0e5e4a;
-  --c-primary-dark: #0a4436;
+  --c-bg-alt: #f0f7fa;
+  --c-text: #10323f;
+  --c-text-sub: #55707c;
+  --c-primary: #0c7699;
+  --c-primary-dark: #085872;
+  --c-primary-light: #22a6c6;
   --c-accent: #d8f34e;
-  --c-line: #e3e8e6;
+  --c-line: #dce8ed;
   --c-alert: #c0392b;
   --ff-base: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
   --ff-en: "Outfit", "Zen Kaku Gothic New", sans-serif;
   --w-content: 1120px;
   --w-narrow: 760px;
   --radius-card: 16px;
-  --shadow-card: 0 8px 32px rgba(26, 46, 53, 0.08);
-  --shadow-hover: 0 16px 40px rgba(26, 46, 53, 0.14);
+  --shadow-card: 0 8px 32px rgba(16, 50, 63, 0.08);
+  --shadow-hover: 0 16px 40px rgba(16, 50, 63, 0.14);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -103,7 +104,7 @@ ul, ol { list-style: none; }
 /* ---------- hero ---------- */
 .hero {
   position: relative; overflow: hidden;
-  background: linear-gradient(135deg, #0a4436 0%, #0e5e4a 55%, #17755d 100%);
+  background: linear-gradient(135deg, #075e7c 0%, #0e86ac 50%, #35b8d4 100%);
   color: #fff;
 }
 .hero__inner {
@@ -181,7 +182,7 @@ ul, ol { list-style: none; }
 
 /* ---------- page hero (lower pages) ---------- */
 .page-hero {
-  background: linear-gradient(135deg, #0a4436, #0e5e4a);
+  background: linear-gradient(135deg, #075e7c 0%, #0e86ac 70%, #2aabc9 100%);
   color: #fff; padding: 80px 0 64px; position: relative; overflow: hidden;
 }
 .page-hero__en {
@@ -220,7 +221,7 @@ a.news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover)
 }
 .badge--info { color: var(--c-primary); border: 1.5px solid var(--c-primary); background: #fff; }
 .badge--event { background: var(--c-primary); color: #fff; }
-.badge--result { background: #1a2e35; color: #fff; }
+.badge--result { background: #12384a; color: #fff; }
 .badge--school { background: var(--c-accent); color: var(--c-primary-dark); }
 
 /* news list page */
@@ -274,7 +275,7 @@ a.news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover)
 .status-open { background: var(--c-accent); color: var(--c-primary-dark); }
 .status-upcoming { background: rgba(255, 255, 255, 0.2); color: #fff; border: 1px solid rgba(255, 255, 255, 0.5); }
 .status-closed { background: rgba(255, 255, 255, 0.25); color: #fff; }
-.status-finished { background: #d7ddda; color: #5a6b70; }
+.status-finished { background: #dde7eb; color: var(--c-text-sub); }
 
 /* schedule table */
 .schedule-table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -288,7 +289,7 @@ a.news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover)
 .table-scroll .schedule-table { min-width: 640px; }
 /* 白背景の表内では、濃色地向けのステータス配色を読める配色に置き換える */
 .schedule-table .status-upcoming { background: #fff; color: var(--c-primary); border: 1.5px solid var(--c-primary); }
-.schedule-table .status-closed { background: #eef1f0; color: var(--c-text-sub); }
+.schedule-table .status-closed { background: #eaf2f6; color: var(--c-text-sub); }
 
 /* ---------- results ---------- */
 .year-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
@@ -334,7 +335,7 @@ a.feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hov
 
 /* ---------- LINE banner ---------- */
 .line-banner {
-  background: linear-gradient(135deg, #0a4436, #17755d);
+  background: linear-gradient(135deg, #075e7c, #29aac9);
   border-radius: 24px; color: #fff; padding: 56px 48px;
   display: flex; align-items: center; justify-content: space-between; gap: 32px;
   position: relative; overflow: hidden;
@@ -466,7 +467,7 @@ a:focus-visible, button:focus-visible {
   .hero__inner { padding: 72px 24px 96px; }
   .hero__lead { font-size: 14px; }
   .hero__actions .btn { width: 100%; }
-  .hero__ball { right: -30px; top: 8%; opacity: 0.5; }
+  .hero__ball { right: -40px; top: 4%; opacity: 0.35; }
 
   .page-hero { padding: 56px 0 44px; }
 

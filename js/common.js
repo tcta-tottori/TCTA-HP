@@ -16,7 +16,7 @@ const NAV_ITEMS = [
 
 const LOGO_SVG = `
 <svg class="site-logo__mark" viewBox="0 0 40 40" aria-hidden="true">
-  <circle cx="20" cy="20" r="18" fill="#0E5E4A"/>
+  <circle cx="20" cy="20" r="18" fill="#0C7699"/>
   <path d="M8 8 Q 20 20 8 32" stroke="#D8F34E" stroke-width="2.4" fill="none"/>
   <path d="M32 8 Q 20 20 32 32" stroke="#D8F34E" stroke-width="2.4" fill="none"/>
 </svg>`;
