@@ -27,6 +27,7 @@
 5. **個人情報をリポジトリに含めない。** 申込データはGoogleフォーム/GAS/スプレッドシート側にのみ存在する。役員の個人連絡先も掲載しない。
 
 6. **文字を画像に載せない。** 要項・ドロー・結果・役員名簿はテキスト/表。画像は写真だけ。原本をそのままコミットし、表示側で調整する。
+   **生成AI画像は使わない**（抽象パターン・OGP下地を含む）。素材が無い箇所はSVGで仮置きする。
 
 7. **文言は `docs/content.md` §12 の統一表に従う。**「エントリー」「要項」「ドロー」「締切」。
 
@@ -57,6 +58,19 @@
 
 - ヒーローのみ `loading="eager"` `fetchpriority="high"`。他は `loading="lazy"` `decoding="async"`
 - 全 `<img>` に `width` / `height` を出力（CLS < 0.05）
+
+### ヒーローの背景メディア（design.md §9-1）
+
+- `.hero-media` を差し替え口とし、その中に `<img>` か `<video>` を**1つだけ**置く。
+  素材が入るまではSVGを仮置きする。ヒーローの高さは `min-height` で持ち、素材の縦横比に依存させない
+- `.hero-overlay` で可読性を担保する。**写真の明るさに文字色を依存させない**。
+  白文字が乗る領域は `rgba(10,77,116,.78)` 以上（真っ白な写真でも 4.5:1 を確保できる下限）。
+  PCは文字の無い右側だけ `.46` まで薄める勾配にしてよい（design.md §9-1 の実測表）。薄い側に白文字を置かない
+- 動画を使う場合の必須条件（1つでも満たせないなら静止画に落とす）:
+  `muted autoplay loop playsinline preload="none"` ＋ `poster` 必須／音声トラックなし／8秒以内・2.5MB以下／
+  640px未満は動画を読み込まず静止画のみ／`navigator.connection.saveData` と
+  `prefers-reduced-motion: reduce` を尊重して再生しない
+- 背景動画は「アニメーション3箇所」に数えないが、**動きの主張は背景の1つだけ**に留める
 - フォント: サブセット + `font-display: swap`。プリロードは Zen Kaku Gothic New 700 のみ
 - 目標: LCP < 2.0s（4G・スマホ）/ Lighthouse Performance 90・Accessibility 95 以上
 
